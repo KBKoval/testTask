@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS public.classes ADD COLUMN class_name character varying COLLATE pg_catalog."default";
