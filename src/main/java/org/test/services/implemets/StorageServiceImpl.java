@@ -44,6 +44,8 @@ public class StorageServiceImpl implements StorageService {
         this.storeLocation = Paths.get(properties.getLocation());
     }
 
+    // TODO ЗДЕСЬ КОСТЫЛЬ. Сначала сохраняем multipartFile во временной директории,  в JobParamerts указываем к нем путь
+    // Не нашел метода передать  в job MultipartFile
     @Async("asyncExecutor")
     public CompletableFuture<Long> store(MultipartFile multipartFile) {
         try {
