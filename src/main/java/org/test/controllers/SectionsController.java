@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.test.models.SectionsDto;
 import org.test.services.interfaces.SectionsService;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 @RestController

@@ -1,8 +1,10 @@
 package org.test.writer;
 
 
-import org.springframework.batch.item.ItemWriter;
 
+
+import org.springframework.batch.infrastructure.item.Chunk;
+import org.springframework.batch.infrastructure.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -46,7 +48,7 @@ public class ExcelWriter implements ItemWriter<FileInfoDto> {
         this.classesRepositoryJDBC = classesRepositoryJDBC;
     }
 
-    public void write(List<? extends FileInfoDto> filesInfo) throws Exception {
+    public void write(Chunk<? extends FileInfoDto> filesInfo) throws Exception {
         filesInfo.forEach(fileInfo -> {
             storeRepository.save(fileInfo);
             service.save(fileInfo);

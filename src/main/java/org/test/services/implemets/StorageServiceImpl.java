@@ -3,6 +3,11 @@ package org.test.services.implemets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.*;
+
+import org.springframework.batch.core.job.Job;
+import org.springframework.batch.core.job.JobExecution;
+import org.springframework.batch.core.job.parameters.JobParameter;
+import org.springframework.batch.core.job.parameters.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,13 +37,13 @@ public class StorageServiceImpl implements StorageService {
     private final StorageProperties properties;
     private final Path storeLocation;
     @Qualifier("asycJobLauncher")
-    private final JobLauncher jobLauncher;
+
 
     private final Job processJob;
 
     @Autowired
-    public StorageServiceImpl(JobLauncher jobLauncher, Job processJob, StorageProperties properties) {
-        this.jobLauncher = jobLauncher;
+    public StorageServiceImpl( Job processJob, StorageProperties properties) {
+
         this.processJob = processJob;
         this.properties = properties;
         this.storeLocation = Paths.get(properties.getLocation());
@@ -64,7 +69,9 @@ public class StorageServiceImpl implements StorageService {
             parameters.put("time", time);
             parameters.put("path", fileParsePath);
             JobParameters jobParameters = new JobParameters(parameters);
+
             JobExecution jobExecution = jobLauncher.run(processJob, jobParameters);
+
             LOGGER.info("job id " + jobExecution.getJobInstance().getInstanceId());
             return CompletableFuture.completedFuture( jobExecution.getJobId() );//jobExecution.getStatus()
         } catch (IOException e) {

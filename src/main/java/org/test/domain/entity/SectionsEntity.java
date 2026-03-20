@@ -1,11 +1,12 @@
 package org.test.domain.entity;
 
+import jakarta.persistence.NamedQueries;
 import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "sections", catalog = "geology", schema = "public")
@@ -16,12 +17,12 @@ public class SectionsEntity implements Serializable {
     @Id
     @Basic(optional = false)
     @GeneratedValue
-    @Type(type = "pg-uuid")
+
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
     @Column(name = "section_name")
     private String sectionName;
-    @OneToMany(mappedBy = "parentId")
+    //@OneToMany(mappedBy = "parentId")
     private Set<ClassesEntity> classesEnitySet;
 
     public SectionsEntity() {

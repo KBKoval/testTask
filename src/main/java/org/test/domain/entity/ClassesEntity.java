@@ -4,7 +4,7 @@ import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.util.UUID;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "classes", catalog = "geology", schema = "public")
@@ -17,7 +17,7 @@ public class ClassesEntity implements Serializable {
     @Id
     @Basic(optional = false)
     @GeneratedValue
-    @Type(type = "pg-uuid")
+    //@Type(type = "pg-uuid")
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
     @Column(name = "class_name")
